@@ -19,7 +19,7 @@ const HomeDiv = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #bbbbbb;
+  background-color: #eeeeee;
   min-height: 75vh;
   border-left: 1px solid black;
   border-right: 1px solid black;
@@ -65,7 +65,7 @@ function Home() {
                 count={count}
               />
               <Button
-                variant="text"
+                variant="contained"
                 endIcon={<ArrowDropDownIcon />}
                 onClick={handleloadMore}
                 size="small"
@@ -73,7 +73,7 @@ function Home() {
                 Afficher plus
               </Button>
               <IconButton
-                color="primary"
+                color="success"
                 onClick={() => {
                   window.scrollTo(0, 0);
                 }}
@@ -81,9 +81,12 @@ function Home() {
                   position: "fixed",
                   bottom: "80px",
                   right: "50px",
+                  color: "#1a2dba",
+                  fontSize: 14,
                 }}
               >
-                <ArrowCircleUpIcon fontSize="large" sx={{ opacity: 0.6 }} />
+                Revenir en haut
+                <ArrowCircleUpIcon fontSize="large" sx={{ opacity: 0.8 }} />
               </IconButton>
             </>
           ) : (

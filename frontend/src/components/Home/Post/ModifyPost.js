@@ -56,12 +56,9 @@ function ModifyPost({ userId, postId, message, setPostsDatas }) {
           <Typography
             variant="body2"
             color="text.primary"
-            sx={{ fontSize: 17, fontWeight: "bold", p: 1 }}
+            sx={{ fontSize: 16, fontWeight: "bold", p: 1 }}
           >
-            {!link.includes("https://www.youtube") &&
-            !link.includes("https://youtube") ? (
-              <a href={link}>{link}</a>
-            ) : null}
+            {link ? <a href={link}>{link}</a> : null}
             {post}
           </Typography>
         ) : (

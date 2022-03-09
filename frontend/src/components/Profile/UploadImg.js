@@ -70,10 +70,10 @@ function UploadImg() {
           component="span"
           size="large"
         >
-          <PhotoCamera fontSize="large" />
+          <PhotoCamera fontSize="large" alt="IconeCamera" />
         </IconButton>
+        <Input type="submit" value="Changer le profil" />
       </label>
-      <Input type="submit" value="Changer le profil" />
     </UploadForm>
   );
 }

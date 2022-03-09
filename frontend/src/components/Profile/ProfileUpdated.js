@@ -6,7 +6,6 @@ import { UserData, UserPicture } from "../Routes/AppContext";
 import SaveIcon from "@mui/icons-material/Save";
 import SendIcon from "@mui/icons-material/Send";
 import { Button } from "@mui/material";
-import TextField from "@mui/material/TextField";
 import styled from "styled-components";
 import { getProfilImg, getUserPosts, putBio } from "../../services/axios";
 import Moment from "react-moment";
@@ -55,11 +54,41 @@ const PostsContainer = styled.div`
   }
 `;
 
-const BioContainer = styled.div`
+const BioContainer = styled.label`
   height: 200px;
   display: flex;
   flex-direction: column;
   align-items: center;
+`;
+
+const StyledTextArea = styled.textarea`
+  background-color: #bbbbbb;
+  color: #444444;
+  padding: 1em;
+  border-radius: 5px;
+  border: 2px solid #999999;
+  outline: none;
+  font-size: 17px;
+  font-weight: bold;
+  line-height: 1.4;
+  width: 400px;
+  height: 100px;
+  transition: background-color 0.5s, border-color 0.5s;
+  resize: none;
+  :hover {
+    cursor: pointer;
+    background-color: #dddddd;
+    border-color: #888888;
+  }
+  :focus {
+    cursor: text;
+    background-color: white;
+    color: #333333;
+    border-color: #777777;
+  }
+  @media (max-width: 650px) {
+    width: 242px;
+  }
 `;
 
 function ProfileUpdated() {
@@ -112,11 +141,11 @@ function ProfileUpdated() {
     <ProfilePage>
       <ProfileContainer>
         <Containers>
-          <h1>
+          <h2>
             {userData.user_firstname} {userData.user_lastname}
-          </h1>
+          </h2>
           {profileImg ? (
-            <ProfilePicture src={profileImg.image_url} alt="ProfilImage" />
+            <ProfilePicture src={profileImg.image_url} alt="Profil" />
           ) : (
             <>
               <ProfilePicture src={DefaultPicture} alt="ProfileImage" />
@@ -125,20 +154,14 @@ function ProfileUpdated() {
           <UploadImg />
         </Containers>
         <Containers>
-          <BioContainer>
-            <h3>Biographie:</h3>
+          <BioContainer htmlFor="Biographie">
             {updateForm === false ? (
               <>
-                <TextField
-                  id="filled-multiline-static"
-                  multiline
-                  rows={4}
-                  sx={{ width: 280 }}
+                <StyledTextArea
+                  id="Biographie"
                   defaultValue={userData.user_bio}
                   onChange={(e) => setBio(e.target.value)}
                   onClick={() => setUpdateForm(!updateForm)}
-                  variant="filled"
-                  disabled
                 />
                 <Button
                   color="primary"
@@ -152,14 +175,10 @@ function ProfileUpdated() {
               </>
             ) : (
               <>
-                <TextField
-                  id="filled-multiline-static"
-                  multiline
-                  rows={4}
-                  sx={{ width: 300 }}
+                <StyledTextArea
+                  id="Biographie"
                   defaultValue={userData.user_bio}
                   onChange={(e) => setBio(e.target.value)}
-                  variant="filled"
                 />
                 <Button
                   color="success"

@@ -19,7 +19,7 @@ function PostImg({ postId }) {
   return (
     <>
       {postImg ? (
-        <CardMedia component="img" image={postImg} alt="PostImage" />
+        <CardMedia component="img" image={postImg} alt={"ImagePost" + postId} />
       ) : null}
     </>
   );

@@ -7,7 +7,7 @@ const StyledFooter = styled.div`
   justify-content: space-around;
   align-items: center;
   flex-wrap: wrap;
-  background: lightblue;
+  background: #1a2dba;
   border-top: 2px solid black;
 `;
 

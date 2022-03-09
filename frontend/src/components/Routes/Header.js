@@ -14,7 +14,7 @@ const NavContainer = styled.nav`
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  background-color: #3399ff;
+  background-color: #1a2dba;
   border-bottom: 1px solid black;
 `;
 
@@ -59,6 +59,9 @@ export const StyledLink = styled(Link)`
   font-weight: bold;
   text-align: center;
   border-radius: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   &:hover,
   &:focus {
     box-shadow: 3px 3px 5px black;
@@ -69,7 +72,8 @@ export const StyledLink = styled(Link)`
   ${(props) =>
     props.$isFullLink &&
     `
-    background-color: lightblue;`}
+    color: black;
+    background-color: white;`}
   ${(props) =>
     props.$isProfileLink &&
     `
@@ -105,12 +109,13 @@ function Header() {
   return (
     <NavContainer>
       <TitleDiv>
-        <HomeLogo src={Icon} />
+        <HomeLogo src={Icon} alt="GroupomaniaLogo" />
         <StyledTitle>Groupomania</StyledTitle>
       </TitleDiv>
       <NavLinkBar>
         <StyledLink to="/">
           <HomeIcon fontSize="large" />
+          Accueil
         </StyledLink>
         {userData ? (
           <>
@@ -123,6 +128,7 @@ function Header() {
               )}
             </StyledLink>
             <StyledLink to="/" onClick={handleLogout} $isFullLink>
+              Logout
               <LogoutIcon fontSize="large" />
             </StyledLink>
           </>

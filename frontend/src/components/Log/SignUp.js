@@ -24,7 +24,7 @@ function SignUp() {
   const [controlPassword, setControlPassword] = useState("");
   const [formCheck, setFormCheck] = useState(false);
   const inputs = document.querySelectorAll(
-    'input[type="text"], input[type="email"]'
+    'input[type="text"], input[type="email"], input[type="password"], input[type="checkbox"]'
   );
 
   const handleSignUp = async (e) => {
@@ -48,7 +48,7 @@ function SignUp() {
       if (value.length > 0 && (value.length < 3 || value.length > 20)) {
         firstnameError.textContent =
           "Le prénom doit faire entre 3 et 20 caractères";
-      } else if (!value.match(/^[a-zA-Z0-9_.-]*$/)) {
+      } else if (!value.match(/^[A-Z][A-Za-zéèêëï-]+$/)) {
         firstnameError.textContent =
           "Le prénom ne doit pas contenir de caractères spéciaux";
       }
@@ -57,7 +57,7 @@ function SignUp() {
       if (value.length > 0 && (value.length < 3 || value.length > 20)) {
         lastnameError.textContent =
           "Le nom doit faire entre 3 et 20 caractères";
-      } else if (!value.match(/^[a-zA-Z0-9_.-]*$/)) {
+      } else if (!value.match(/^[A-Z][A-Za-zéèêëï-]+$/)) {
         lastnameError.textContent =
           "Le nom ne doit pas contenir de caractères spéciaux";
       }
@@ -69,13 +69,13 @@ function SignUp() {
     }
     function passwordChecker() {
       if (password !== controlPassword) {
-        passwordConfirmError.innerHTML =
+        passwordConfirmError.textContent =
           "Les mots de passe ne correspondent pas";
       }
     }
     function termsChecker() {
       if (!terms.checked) {
-        termsError.innerHTML = "Veuillez accepter les conditions générales";
+        termsError.textContent = "Veuillez accepter les conditions générales";
       }
     }
     function formChecker() {
@@ -90,22 +90,22 @@ function SignUp() {
           case "user_email":
             emailChecker(input.value);
             break;
-          case "password":
+          case "passwordConfirm":
             passwordChecker();
             break;
           case "terms":
             termsChecker();
             break;
           default:
-            console.log("bug");
+            console.log("default");
         }
       });
       if (
-        passwordConfirmError.innerHTML === "" &&
-        termsError.innerHTML === "" &&
-        emailError.innerHTML === "" &&
-        firstnameError.innerHTML === "" &&
-        lastnameError.innerHTML === ""
+        passwordConfirmError.textContent === "" &&
+        termsError.textContent === "" &&
+        emailError.textContent === "" &&
+        firstnameError.textContent === "" &&
+        lastnameError.textContent === ""
       ) {
         setFormCheck(true);
       }

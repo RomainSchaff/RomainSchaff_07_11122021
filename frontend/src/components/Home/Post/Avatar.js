@@ -21,6 +21,7 @@ function SetAvatar({ postUserId }) {
       <Avatar
         src={avatar}
         sx={{ height: 43, width: 43, borderRadius: 1, ml: 0.5 }}
+        alt={"AvatarUser" + postUserId}
       ></Avatar>
     </>
   );

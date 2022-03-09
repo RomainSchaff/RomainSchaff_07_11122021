@@ -34,6 +34,10 @@ const StyledDate = styled.div`
   font-style: oblique;
 `;
 
+const StyledTitle = styled.h2`
+  font-size: 18px;
+`;
+
 function DisplayUsers() {
   const [users, setUsers] = useState([]);
   const [count, setCount] = useState(3);
@@ -46,7 +50,7 @@ function DisplayUsers() {
 
   return (
     <UsersDiv>
-      <h3>Derniers membres:</h3>
+      <StyledTitle>Derniers membres:</StyledTitle>
       {users.slice(0, count).map((user) => {
         return (
           <StyledDiv key={user.user_firstname}>
@@ -65,6 +69,8 @@ function DisplayUsers() {
           setCount(count + 3);
         }}
       >
+        {" "}
+        Plus
         <ExpandMoreIcon />
       </IconButton>
       {count > 3 ? (
@@ -73,6 +79,8 @@ function DisplayUsers() {
             setCount(count - 3);
           }}
         >
+          {" "}
+          Moins
           <ExpandLessIcon />
         </IconButton>
       ) : null}

@@ -25,9 +25,12 @@ function ProfilePicture({ userId }) {
   return (
     <>
       {profileImg ? (
-        <ProfilePictureStyled src={profileImg} />
+        <ProfilePictureStyled
+          src={profileImg}
+          alt={"ImageProfilUser" + userId}
+        />
       ) : (
-        <ProfilePictureStyled src={DefaultProfile} />
+        <ProfilePictureStyled src={DefaultProfile} alt="DefaultPicture" />
       )}
     </>
   );

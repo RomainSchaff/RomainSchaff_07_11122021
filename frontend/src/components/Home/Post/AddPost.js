@@ -22,8 +22,7 @@ const FormPost = styled.form`
   flex-direction: column;
   aligh-items: center;
   background-color: lightblue;
-  border: 2px solid black;
-  border-radius: 7px;
+  border-radius: 5px;
   @media (max-width: 650px) {
     width: 280px;
   }
@@ -39,6 +38,37 @@ const ButtonDiv = styled.div`
   justify-content: space-around;
   align-items: center;
   background-color: lightblue;
+  border-radius: 5px;
+`;
+
+const StyledTextArea = styled.textarea`
+  background-color: #bbbbbb;
+  color: black;
+  padding: 1em;
+  border-radius: 5px;
+  border: 2px solid #999999;
+  outline: none;
+  font-size: 17px;
+  font-weight: bold;
+  line-height: 1.4;
+  width: 562px;
+  height: 100px;
+  transition: background-color 0.5s, border-color 0.5s;
+  resize: none;
+  :hover {
+    cursor: pointer;
+    background-color: #dddddd;
+    border-color: black;
+  }
+  :focus {
+    cursor: text;
+    background-color: white;
+    color: #333333;
+    border-color: black;
+  }
+  @media (max-width: 650px) {
+    width: 242px;
+  }
 `;
 
 function AddPost({ setPostsDatas }) {
@@ -105,91 +135,90 @@ function AddPost({ setPostsDatas }) {
 
   return (
     <FormPost>
-      <TextField
-        id="filled-multiline-static"
-        multiline
-        rows={5}
-        value={post}
-        sx={{ backgroundColor: "white" }}
-        placeholder={`Quoi de neuf ${userData.user_firstname} ?`}
-        onChange={(e) => setPost(e.target.value)}
-        variant="filled"
-      />
-      {post || file || video ? (
-        <Card>
-          <CardHeader
-            avatar={<SetAvatar postUserId={userData.user_id}></SetAvatar>}
-            title={userData.user_firstname + " " + userData.user_lastname}
-            subheader={<Moment fromNow></Moment>}
-            sx={{ height: 50, p: 0 }}
-          />
-          {postPicture ? (
-            <CardMedia
-              component="img"
-              image={postPicture}
-              alt=""
-              sx={{ maxHeight: 350 }}
+      <label htmlFor="textareapost">
+        <StyledTextArea
+          id="textareapost"
+          value={post}
+          placeholder={`Quoi de neuf ${userData.user_firstname} ?`}
+          onChange={(e) => setPost(e.target.value)}
+        />
+
+        {post || file || video ? (
+          <Card>
+            <CardHeader
+              avatar={<SetAvatar postUserId={userData.user_id}></SetAvatar>}
+              title={userData.user_firstname + " " + userData.user_lastname}
+              subheader={<Moment fromNow></Moment>}
+              sx={{ height: 50, p: 0 }}
             />
-          ) : null}
-          {video ? (
-            <iframe
-              src={video}
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-              title={video}
-              width="100%"
-              height="300px"
-            ></iframe>
-          ) : null}
-          <CardContent sx={{ p: 0 }}>
-            <Typography
-              variant="body2"
-              color="text.primary"
-              sx={{ fontSize: 17, fontWeight: "bold", p: 1 }}
+            {postPicture ? (
+              <CardMedia
+                component="img"
+                image={postPicture}
+                alt=""
+                sx={{ maxHeight: 350 }}
+              />
+            ) : null}
+            {video ? (
+              <iframe
+                src={video}
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                title={video}
+                width="100%"
+                height="300px"
+              ></iframe>
+            ) : null}
+            <CardContent sx={{ p: 0 }}>
+              <Typography
+                variant="body2"
+                color="text.primary"
+                sx={{ fontSize: 16, fontWeight: "bold", p: 1 }}
+              >
+                {post}
+              </Typography>
+            </CardContent>
+          </Card>
+        ) : null}
+        <ButtonDiv>
+          {post || postPicture || video ? (
+            <Button
+              onClick={cancelPost}
+              startIcon={<SendIcon />}
+              variant="contained"
+              color="error"
+              size="small"
             >
-              {post}
-            </Typography>
-          </CardContent>
-        </Card>
-      ) : null}
-      <ButtonDiv>
-        {post || postPicture || video ? (
+              Annuler
+            </Button>
+          ) : null}
+          <label htmlFor="icon-button-file">
+            <FileInput
+              type="file"
+              id="icon-button-file"
+              name="file"
+              accept=".jpg, .jpeg, .png"
+              onChange={handlePicture}
+            />
+            <IconButton
+              color="primary"
+              aria-label="upload picture"
+              component="span"
+            >
+              <PhotoCamera fontSize="medium" alt="IconeCamera" />
+            </IconButton>
+          </label>
           <Button
-            onClick={cancelPost}
+            onClick={handlePost}
             startIcon={<SendIcon />}
             variant="contained"
-            color="error"
             size="small"
           >
-            Annuler
+            Envoyer
           </Button>
-        ) : null}
-        <label htmlFor="icon-button-file">
-          <FileInput
-            type="file"
-            id="icon-button-file"
-            name="file"
-            accept=".jpg, .jpeg, .png"
-            onChange={handlePicture}
-          />
-          <IconButton
-            color="primary"
-            aria-label="upload picture"
-            component="span"
-          >
-            <PhotoCamera fontSize="medium" />
-          </IconButton>
-        </label>
-        <Button
-          onClick={handlePost}
-          startIcon={<SendIcon />}
-          variant="contained"
-          size="small"
-        >
-          Envoyer
-        </Button>
-      </ButtonDiv>
+        </ButtonDiv>
+      </label>
     </FormPost>
   );
 }
